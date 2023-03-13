@@ -1,8 +1,9 @@
-import './App.css';
+import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
-import { GlobalStyle } from './components/NewsItem'
+import styled from 'styled-components';
+import { GlobalStyle } from './globalStyle'
 import { Route } from 'react-router-dom';
 import { NewsType } from './interface';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +13,30 @@ import { Navbar, Container, Nav, Form } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 
+const LoadBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:50px;
+  h1 {
+    width:200px;
+    font-family: Poppins;
+    font-size: 1.3em;
+    color:rgba(129, 129, 129, 0.5);
+    text-align: center;
+  }
+`
+
+const MainBg = styled(Carousel.Item)`
+  width:100%;
+  height: 400px;
+  background-color: rgb(0, 0, 0);
+  img {
+    height:100%;
+    object-fit: cover;
+    opacity:0.7
+  }
+`
 
 function App() {
   let [loading, setLoading] = useState(true);
@@ -49,46 +74,43 @@ function App() {
         </Container>
       </Navbar>
       <Carousel>
-        <Carousel.Item interval={1000}>
+        <MainBg interval={1000}>
           <img
             className="d-block w-100"
-            src="https://marketplace.canva.com/EAD2962NKnQ/2/0/1600w/canva-rainbow-gradient-pink-and-purple-zoom-virtual-background-_Tcjok-d9b4.jpg"
+            src={process.env.PUBLIC_URL + `/2248525.jpg`}
             alt="First slide"
           />
           <Carousel.Caption>
             <h3>First slide label</h3>
           </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item interval={1000}>
+        </MainBg>
+        <MainBg interval={1000}>
           <img
             className="d-block w-100"
-            src="https://marketplace.canva.com/EAD2962NKnQ/2/0/1600w/canva-rainbow-gradient-pink-and-purple-zoom-virtual-background-_Tcjok-d9b4.jpg"
-            alt="Second slide"
+            src={process.env.PUBLIC_URL + `/2248560.jpg`}
           />
           <Carousel.Caption>
             <h3>Second slide label</h3>
           </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
+        </MainBg>
+        <MainBg>
           <img
             className="d-block w-100"
-            src="https://marketplace.canva.com/EAD2962NKnQ/2/0/1600w/canva-rainbow-gradient-pink-and-purple-zoom-virtual-background-_Tcjok-d9b4.jpg"
+            src={process.env.PUBLIC_URL + `/2248664.jpg`}
             alt="Third slide"
           />
           <Carousel.Caption>
             <h3>Third slide label</h3>
           </Carousel.Caption>
-        </Carousel.Item>
+        </MainBg>
       </Carousel>
       {
         loading ?
-          <div className={'loadBox'}>
+          <LoadBox>
             <h1>Loading  <FontAwesomeIcon icon={faSpinner} pulse/></h1>
-          </div> 
+          </LoadBox> 
         : <NewsItem news={news}/>
       }
-
-      
 
     </div>
   );
