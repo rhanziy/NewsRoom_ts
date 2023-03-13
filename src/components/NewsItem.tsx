@@ -4,25 +4,25 @@ import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { NewsType } from './../interface';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 type News = {
     [key: string]: NewsType[]
 }
+
 
 const CardBox = styled.div`
     display:grid;
     grid-template-columns: repeat(auto-fill, minmax(13rem, auto));
     gap : 20px;
     width:90%;
-    margin:50px auto;
+    margin:20px auto;
 `
 
 const StyledList = styled(ListGroup.Item)`
     font-size: 14px;
     cursor: pointer;
 `
-
 const StyledList1 = styled(StyledList)<{author :String}>`
     background-color: ${ props => 
         props.author === '한겨레' ? 'rgb(154, 201, 183)' :
@@ -34,6 +34,7 @@ const StyledList1 = styled(StyledList)<{author :String}>`
 
 function NewsItem({ news }: News) {
     const category = [];
+
     return (
         <>
             <GlobalStyle />

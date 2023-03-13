@@ -7,11 +7,34 @@ import { GlobalStyle } from './globalStyle'
 import { Route } from 'react-router-dom';
 import { NewsType } from './interface';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner,} from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import NewsItem from './components/NewsItem'
 import { Navbar, Container, Nav, Form } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
+
+const MainBg = styled(Carousel.Item)`
+  width:100%;
+  height: 400px;
+  background-color: rgb(0, 0, 0);
+  img {
+    height:100%;
+    object-fit: cover;
+    opacity:0.7
+  }
+`
+
+const RefreshBox = styled.h4`
+    width:90%;
+    height:50px;
+    margin:0 auto;
+    padding:20px 5px;
+    text-align: right;
+    color:rgb(131, 131, 131);
+`
+const Refresh = styled(FontAwesomeIcon)`
+  cursor: pointer;
+`
 
 const LoadBox = styled.div`
   display: flex;
@@ -27,23 +50,13 @@ const LoadBox = styled.div`
   }
 `
 
-const MainBg = styled(Carousel.Item)`
-  width:100%;
-  height: 400px;
-  background-color: rgb(0, 0, 0);
-  img {
-    height:100%;
-    object-fit: cover;
-    opacity:0.7
-  }
-`
 
 function App() {
-  let [loading, setLoading] = useState(true);
-  let [news, setNews] = useState<NewsType[]>([]);
-  
-  const getNews = async() => {
+  let [ loading, setLoading ] = useState(true);
+  let [ news, setNews ] = useState<NewsType[]>([]);
+  let [ refresh, setRefresh ] = useState(false);
 
+  const getNews = async() => {
     try{
       const res = await axios.get(
         'https://newsapi.org/v2/top-headlines?country=kr&apiKey=f7bfbc4e867141f5b7b899ee5f13742e'
@@ -57,8 +70,11 @@ function App() {
   
   useEffect(()=>{
     getNews();
-  }, []);
+  }, [refresh]);
   
+  const clickRefresh = () => {
+    setRefresh(true);
+  }
 
   return (
     <div className="App">
@@ -109,7 +125,13 @@ function App() {
           <LoadBox>
             <h1>Loading  <FontAwesomeIcon icon={faSpinner} pulse/></h1>
           </LoadBox> 
-        : <NewsItem news={news}/>
+        : 
+          <div>
+            <RefreshBox>
+              <Refresh onClick={clickRefresh} icon={faRotateRight} />
+            </RefreshBox>
+            <NewsItem news={news}/>
+          </div>
       }
 
     </div>
