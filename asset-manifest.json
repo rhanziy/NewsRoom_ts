@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/github.io/NewsRoom_ts/static/css/main.9e23d80d.css",
+    "main.js": "/github.io/NewsRoom_ts/static/js/main.e572753f.js",
+    "index.html": "/github.io/NewsRoom_ts/index.html",
+    "main.9e23d80d.css.map": "/github.io/NewsRoom_ts/static/css/main.9e23d80d.css.map",
+    "main.e572753f.js.map": "/github.io/NewsRoom_ts/static/js/main.e572753f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e23d80d.css",
+    "static/js/main.e572753f.js"
+  ]
+}
